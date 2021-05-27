@@ -1,0 +1,67 @@
+Sandbox.Game/Sandbox.Client
+Sandbox.Game/Sandbox.Client.get_Pawn()
+Sandbox.Game/Sandbox.Client.set_Pawn( Sandbox.Entity )
+Sandbox.Game/Sandbox.Entity
+Sandbox.Game/Sandbox.Entity.Delete()
+Sandbox.Game/Sandbox.Entity.get_ActiveChild()
+Sandbox.Game/Sandbox.Entity.get_Input()
+Sandbox.Game/Sandbox.Entity.get_IsClient()
+Sandbox.Game/Sandbox.Entity.get_IsServer()
+Sandbox.Game/Sandbox.Entity.get_Position()
+Sandbox.Game/Sandbox.Entity.get_Scale()
+Sandbox.Game/Sandbox.Entity.set_Camera( Sandbox.ICamera )
+Sandbox.Game/Sandbox.Entity.set_EnableDrawing( System.Boolean )
+Sandbox.Game/Sandbox.Entity.set_EnableHideInFirstPerson( System.Boolean )
+Sandbox.Game/Sandbox.Entity.set_EnableShadowInFirstPerson( System.Boolean )
+Sandbox.Game/Sandbox.Entity.set_Position( Vector3 )
+Sandbox.Game/Sandbox.Entity.set_Rotation( Rotation )
+Sandbox.Game/Sandbox.Entity.set_Scale( System.Single )
+Sandbox.Game/Sandbox.ICamera
+Sandbox.Game/Sandbox.InputButton
+Sandbox.Game/Sandbox.Internal.WaterLevel
+Sandbox.Game/Sandbox.Internal.WaterLevel.get_Fraction()
+Sandbox.Game/Sandbox.Local.get_Pawn()
+Sandbox.Game/Sandbox.ModelEntity..ctor()
+Sandbox.Game/Sandbox.ModelEntity.set_EnableAllCollisions( System.Boolean )
+Sandbox.Game/Sandbox.ModelEntity.SetModel( System.String )
+Sandbox.Game/Sandbox.ModelEntity.SetupPhysicsFromModel( Sandbox.PhysicsMotionType, System.Boolean )
+Sandbox.Game/Sandbox.Mouse.get_Delta()
+Sandbox.Game/Sandbox.PhysicsGroup
+Sandbox.Game/Sandbox.PhysicsMotionType
+Sandbox.Game/Sandbox.UI.Panel.AddChild<T>( System.String )
+Sandbox.Game/Sandbox.UI.Panel.SetTemplate( System.String )
+Sandbox.Game/Sandbox.UI.RootPanel
+Sandbox.Game/Sandbox.UserInput
+Sandbox.Game/Sandbox.UserInput.Down( Sandbox.InputButton )
+Sandbox.Game/Sandbox.UserInput.get_MouseDelta()
+Sandbox.Game/Sandbox.UserInput.get_Rotation()
+Sandbox.Game/Sandbox.UserInput.Pressed( Sandbox.InputButton )
+Sandbox.System/Rotation
+Sandbox.System/Rotation.FromYaw( System.Single )
+Sandbox.System/Rotation.get_Forward()
+Sandbox.System/Rotation.get_Right()
+Sandbox.System/Rotation.LookAt( Vector3, Vector3 )
+Sandbox.System/Sandbox.LibraryAttribute
+Sandbox.System/Sandbox.Log.Info( System.String )
+Sandbox.System/Vector2
+Sandbox.System/Vector2.get_x()
+Sandbox.System/Vector2.get_y()
+Sandbox.System/Vector3
+Sandbox.System/Vector3..ctor( System.Single, System.Single, System.Single )
+Sandbox.System/Vector3.Dot( Vector3 )
+Sandbox.System/Vector3.get_Length()
+Sandbox.System/Vector3.get_x()
+Sandbox.System/Vector3.get_y()
+Sandbox.System/Vector3.get_z()
+Sandbox.System/Vector3.op_Addition( Vector3, Vector3 )
+Sandbox.System/Vector3.WithZ( System.Single )
+System.Private.CoreLib/System.Boolean
+System.Private.CoreLib/System.Int32
+System.Private.CoreLib/System.Object
+System.Private.CoreLib/System.Runtime.CompilerServices.ExtensionAttribute
+System.Private.CoreLib/System.Single
+System.Private.CoreLib/System.String
+System.Private.CoreLib/System.String.Concat( System.String, System.String )
+System.Private.CoreLib/System.String.Format( System.String, System.Object, System.Object )
+System.Private.CoreLib/System.String.Format( System.String, System.Object, System.Object, System.Object )
+System.Private.CoreLib/System.Void

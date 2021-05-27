@@ -1,0 +1,19 @@
+{
+		"name": "Run Away",
+		"sharedassets": "*.*",
+		
+		"depends": 
+		[
+			"base",
+			"citizen",
+			"rust"
+		],
+
+		"gamemodes":
+		[
+			{
+				"name": "runaway",
+				"title": "runaway"
+			}
+		]
+}
