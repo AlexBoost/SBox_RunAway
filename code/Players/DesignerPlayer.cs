@@ -29,8 +29,7 @@ namespace MinimalExample
 
 			base.Respawn();
 
-			//Position = new Vector3( Position.x, Position.y - 500, Position.z + 300 );
-			Rotation = Rotation.FromYaw( 90 );
+			Position = new Vector3( Position.x - 300, Position.y - 100, Position.z + 100 );
 		}
 
 		/// <summary>
@@ -42,17 +41,16 @@ namespace MinimalExample
 
 			if ( IsServer && Input.Down( InputButton.Attack1 ) )
 			{
-				Log.Info( "SPAWN STEP : " + Position.ToVectorString() );
-				var ragdoll = new ModelEntity();
-				ragdoll.SetModel( "models/step.vmdl" );
-				ragdoll.Scale = 0.1f;
-				ragdoll.Position = new Vector3( 1000, Position.y, Position.z );
-				ragdoll.Rotation = Rotation.Identity;
-				ragdoll.EnableAllCollisions = true;
-				ragdoll.SetupPhysicsFromModel( PhysicsMotionType.Static, false );
+				var step = new ModelEntity();
+				step.SetModel( "models/step.vmdl" );
+				step.Scale = 0.1f;
+				step.Position = new Vector3( 1000, Position.y, Position.z );
+				step.Rotation = Rotation.Identity;
+				step.EnableAllCollisions = true;
+				step.SetupPhysicsFromModel( PhysicsMotionType.Static, false );
 				RunAwayContext.StepList.Add( new Step
 				{
-					Entity = ragdoll,
+					Entity = step,
 					CreationDate = DateTime.Now
 				});
 			}
