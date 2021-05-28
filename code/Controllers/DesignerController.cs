@@ -17,16 +17,16 @@ namespace minimal.Controllers
 		public override void Simulate()
 		{
 			Rotation = Rotation.FromYaw( 180 );
-			//var vel = new Vector3(0, (Input.Left),(Input.Forward));
-			var vel = new Vector3(0, -Input.MouseDelta.x, -Input.MouseDelta.y);
+			var vel = new Vector3( 0, (Input.Left), (Input.Forward) );
+			//var vel = new Vector3(0, -Input.MouseDelta.x, -Input.MouseDelta.y);
 
-			vel = vel.Normal * 2000;
+			vel = vel.Normal * 3000;
 
 			if ( Input.Down( InputButton.Run ) )
-				vel *= 5.0f;
+				vel *= 2.0f;
 
 			if ( Input.Down( InputButton.Duck ) )
-				vel *= 0.2f;
+				vel *= 0.5f;
 
 			Velocity += vel * Time.Delta;
 

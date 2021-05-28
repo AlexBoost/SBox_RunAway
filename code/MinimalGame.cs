@@ -6,6 +6,8 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using minimal.Extensions;
+using SBox_RunAway.Context;
+using System.Linq;
 
 //
 // You don't need to put things in a namespace, but it doesn't hurt.
@@ -57,20 +59,37 @@ namespace MinimalExample
 		{
 			base.Simulate( cl );
 
-			if ( IsServer && Input.Pressed( InputButton.Attack2 ) )
+			if ( IsServer)
 			{
-				cl.Pawn.Delete();
-				if ( cl.Pawn is RunnerPlayer )
+				RemoveOldStep();
+				if ( Input.Pressed( InputButton.Attack2 ) )
 				{
-					var player = new DesignerPlayer();
-					cl.Pawn = player;
-					player.Respawn();
+					cl.Pawn.Delete();
+					if ( cl.Pawn is RunnerPlayer )
+					{
+						var player = new DesignerPlayer();
+						cl.Pawn = player;
+						player.Respawn();
+					}
+					else
+					{
+						var player = new RunnerPlayer();
+						cl.Pawn = player;
+						player.Respawn();
+					}
 				}
-				else
+			}
+		}
+
+		private void RemoveOldStep()
+		{
+			if ( RunAwayContext.StepList.Any() )
+			{
+				var stepList = RunAwayContext.StepList.Where( x => x.CreationDate < DateTime.Now.AddSeconds( -15 ) ).ToArray();
+				foreach ( var step in stepList )
 				{
-					var player = new RunnerPlayer();
-					cl.Pawn = player;
-					player.Respawn();
+					step.Entity.Delete();
+					RunAwayContext.StepList.Remove( step );
 				}
 			}
 		}
