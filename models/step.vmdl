@@ -15,7 +15,7 @@
 						[
 							{
 								from = "material.vmat"
-								to = "../addons/minimal/models/step.vmat"
+								to = "materials/step.vmat"
 							},
 						]
 						use_global_default = false
@@ -36,7 +36,7 @@
 						recenter_on_parent_bone = false
 						offset_origin = [ 0.0, 0.0, 0.0 ]
 						offset_angles = [ 0.0, 0.0, 0.0 ]
-						filename = "content/Step.fbx"
+						filename = "contents/Step.fbx"
 						import_scale = 1.0
 						maxMeshVertices = 0
 						qemError = 0.0
@@ -54,7 +54,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "content/Step.fbx"
+						filename = "contents/Step.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0

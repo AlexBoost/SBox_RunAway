@@ -15,15 +15,40 @@
 						[
 							{
 								from = "circle.vmat"
-								to = "../addons/minimal/models/cursoraim_circle.vmat"
+								to = "materials/cursor_circle.vmat"
 							},
 							{
 								from = "pointer.vmat"
-								to = "../addons/minimal/models/cursoraim_pointer.vmat"
+								to = "materials/cursor_pointer.vmat"
 							},
 						]
 						use_global_default = false
 						global_default_material = ""
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsMeshFile"
+						name = "CursorAim"
+						parent_bone = ""
+						surface_prop = "default"
+						collision_prop = "default"
+						recenter_on_parent_bone = false
+						offset_origin = [ 0.0, 0.0, 0.0 ]
+						offset_angles = [ 0.0, 0.0, 0.0 ]
+						filename = "contents/CursorAim.fbx"
+						import_scale = 1.0
+						maxMeshVertices = 0
+						qemError = 0.0
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
 					},
 				]
 			},
@@ -33,7 +58,7 @@
 				[
 					{
 						_class = "RenderMeshFile"
-						filename = "content/CursorAim.fbx"
+						filename = "contents/CursorAim.fbx"
 						import_translation = [ 0.0, 0.0, 0.0 ]
 						import_rotation = [ 0.0, 0.0, 0.0 ]
 						import_scale = 1.0
