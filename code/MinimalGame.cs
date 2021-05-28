@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using minimal.Extensions;
 using SBox_RunAway.Context;
 using System.Linq;
+using System.Collections.Generic;
 
 //
 // You don't need to put things in a namespace, but it doesn't hurt.
@@ -28,10 +29,18 @@ namespace MinimalExample
 	[Library( "runaway" )]
 	public partial class MinimalGame : Sandbox.Game
 	{
+		private DateTime _lavaResetTime;
+		private bool _isLavaMoving;
+		private ModelEntity _lava;
+		private List<Client> _clientList;
 		public MinimalGame()
 		{
 			if ( IsServer )
 			{
+				InitLava();
+				ResetLava();
+
+				_clientList = new List<Client>();
 				Log.Info( "My Gamemode Has Created Serverside!" );
 
 				// Create a HUD entity. This entity is globally networked
@@ -40,6 +49,22 @@ namespace MinimalExample
 				// this just feels like a nice neat way to do it.
 				new MinimalHudEntity();
 			}
+		}
+
+		private void InitLava()
+		{
+			_lava = new ModelEntity();
+			_lava.SetModel( "models/lavafloor2.vmdl" );
+			_lava.Scale = 1f;
+			_lava.Rotation = Rotation.FromYaw( 180 );
+			_lava.EnableAllCollisions = true;
+			_lava.SetupPhysicsFromModel( PhysicsMotionType.Static, false );
+		}
+
+		private void ResetLava()
+		{
+			_lava.Position = new Vector3( 1000, Position.y, Position.z - 700 );
+			_lavaResetTime = DateTime.Now;
 		}
 
 		/// <summary>
@@ -52,7 +77,20 @@ namespace MinimalExample
 			var player = new RunnerPlayer();
 			client.Pawn = player;
 
+			_clientList.Add(client);
+
 			player.Respawn();
+		}
+
+		public override void ClientSpawn()
+		{
+			base.ClientSpawn();
+		}
+
+		public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+		{
+			_clientList.RemoveAll(x => x.SteamId == cl.SteamId );
+			base.ClientDisconnect( cl, reason );
 		}
 
 		public override void Simulate( Client cl )
@@ -62,6 +100,7 @@ namespace MinimalExample
 			if ( IsServer)
 			{
 				RemoveOldStep();
+				MoveLava();
 				if ( Input.Pressed( InputButton.Attack2 ) )
 				{
 					cl.Pawn.Delete();
@@ -78,6 +117,15 @@ namespace MinimalExample
 						player.Respawn();
 					}
 				}
+			}
+		}
+
+		private void MoveLava()
+		{
+			if ( !_isLavaMoving && _lavaResetTime < DateTime.Now.AddSeconds( -10 ) )
+			{
+				_lava.MoveTo( new Vector3( _lava.Position.x, _lava.Position.y, 800 ), 60f );
+				_isLavaMoving = true;
 			}
 		}
 
