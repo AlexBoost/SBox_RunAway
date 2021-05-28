@@ -1,5 +1,5 @@
 {
-		"name": "Run Away",
+		"name": "runaway",
 		"sharedassets": "*.*",
 		
 		"depends": 
@@ -12,7 +12,7 @@
 		"gamemodes":
 		[
 			{
-				"name": "Run Away",
+				"name": "runaway",
 				"title": "Run Away"
 			}
 		]
