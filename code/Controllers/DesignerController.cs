@@ -11,23 +11,34 @@ namespace minimal.Controllers
 	[Library]
 	public class DesignerController : BasePlayerController
 	{
-		private Vector3 _lastPos;
+		public float Bounce { get; set; } = 0.25f;
+		public float Size { get; set; } = 20.0f;
 
 		public override void Simulate()
 		{
-			Vector3 vel = new Vector3( 0, -Input.MouseDelta.x, -Input.MouseDelta.y );
+			Rotation = Rotation.FromYaw( 180 );
+			//var vel = new Vector3(0, (Input.Left),(Input.Forward));
+			var vel = new Vector3(0, -Input.MouseDelta.x, -Input.MouseDelta.y);
 
-			Move( vel );
-			//vel = vel.Normal * 20000;
+			vel = vel.Normal * 2000;
 
-			//Velocity += vel * Time.Delta;
+			if ( Input.Down( InputButton.Run ) )
+				vel *= 5.0f;
 
-			//if ( Velocity.LengthSquared > 0.01f )
-			//{
-			//	Move( Velocity * Time.Delta );
-			//}
+			if ( Input.Down( InputButton.Duck ) )
+				vel *= 0.2f;
 
-			//Velocity = Velocity.Approach( 0, Velocity.Length * Time.Delta * 5.0f );
+			Velocity += vel * Time.Delta;
+
+			if ( Velocity.LengthSquared > 0.01f )
+			{
+				Move( Velocity * Time.Delta );
+			}
+
+			Velocity = Velocity.Approach( 0, Velocity.Length * Time.Delta * 5.0f );
+
+			if ( Input.Down( InputButton.Jump ) )
+				Velocity = Velocity.Approach( 0, Velocity.Length * Time.Delta * 5.0f );
 		}
 
 		public void Move( Vector3 delta, int a = 0 )
@@ -35,20 +46,29 @@ namespace minimal.Controllers
 			if ( a > 1 )
 				return;
 
+			var len = delta.Length;
 			var targetPos = Position + delta;
+			var tr = Trace.Ray( Position, targetPos ).WorldOnly().Size( Size ).Run();
 
-			Position = targetPos;
-		}
+			if ( tr.StartedSolid )
+			{
+				Position = targetPos;
+			}
+			else if ( tr.Hit )
+			{
+				Position = tr.EndPos + tr.Normal;
 
-		public override void FrameSimulate()
-		{
-			base.FrameSimulate();
+				// subtract the normal from our velocity
+				Velocity = Velocity.SubtractDirection( tr.Normal * (1.0f + Bounce) );
 
-			Rotation = Rotation.FromYaw( 180 );
+				delta = Velocity.Normal * delta.Length * (1.0f - tr.Fraction);
 
-			Vector3 vel = new Vector3( 0, -Mouse.Delta.x, -Mouse.Delta.y );
-
-			Move( vel );
+				Move( delta, ++a );
+			}
+			else
+			{
+				Position = tr.EndPos;
+			}
 		}
 	}
 }
