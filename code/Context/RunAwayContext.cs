@@ -11,5 +11,6 @@ namespace SBox_RunAway.Context
 	public static class RunAwayContext
 	{
 		public static List<Step> StepList = new List<Step>();
+		public static List<Client> ClientList = new List<Client>();
 	}
 }

@@ -32,7 +32,7 @@ namespace MinimalExample
 		private DateTime _lavaResetTime;
 		private bool _isLavaMoving;
 		private ModelEntity _lava;
-		private List<Client> _clientList;
+
 		public MinimalGame()
 		{
 			if ( IsServer )
@@ -40,7 +40,6 @@ namespace MinimalExample
 				InitLava();
 				ResetLava();
 
-				_clientList = new List<Client>();
 				Log.Info( "My Gamemode Has Created Serverside!" );
 
 				// Create a HUD entity. This entity is globally networked
@@ -77,7 +76,7 @@ namespace MinimalExample
 			var player = new RunnerPlayer();
 			client.Pawn = player;
 
-			_clientList.Add(client);
+			RunAwayContext.ClientList.Add(client);
 
 			player.Respawn();
 		}
@@ -89,7 +88,7 @@ namespace MinimalExample
 
 		public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
 		{
-			_clientList.RemoveAll(x => x.SteamId == cl.SteamId );
+			RunAwayContext.ClientList.RemoveAll(x => x.SteamId == cl.SteamId );
 			base.ClientDisconnect( cl, reason );
 		}
 
@@ -100,7 +99,7 @@ namespace MinimalExample
 			if ( IsServer)
 			{
 				RemoveOldStep();
-				MoveLava();
+				//MoveLava();
 				if ( Input.Pressed( InputButton.Attack2 ) )
 				{
 					cl.Pawn.Delete();
@@ -133,7 +132,12 @@ namespace MinimalExample
 		{
 			if ( RunAwayContext.StepList.Any() )
 			{
-				var stepList = RunAwayContext.StepList.Where( x => x.CreationDate < DateTime.Now.AddSeconds( -15 ) ).ToArray();
+				float time = 15;
+
+				if ( RunAwayContext.ClientList.Count == 1 )
+					time = 30;
+
+				var stepList = RunAwayContext.StepList.Where( x => x.CreationDate < DateTime.Now.AddSeconds( -time ) ).ToArray();
 				foreach ( var step in stepList )
 				{
 					step.Entity.Delete();
