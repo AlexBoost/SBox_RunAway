@@ -41,9 +41,9 @@ namespace MinimalExample
 
 			if ( IsServer && Input.Down( InputButton.Attack1 ) )
 			{
-				if ( RunAwayContext.ClientList.Count > 1 )
-					if ( RunAwayContext.StepList.Count >= 200 )
-						return;
+				//if ( RunAwayContext.ClientList.Count > 1 )
+				//	if ( RunAwayContext.StepList.Count >= 200 )
+				//		return;
 
 				var step = new ModelEntity();
 				step.SetModel( "models/step.vmdl" );

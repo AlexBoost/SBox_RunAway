@@ -17,8 +17,8 @@ namespace minimal.Controllers
 		public override void Simulate()
 		{
 			Rotation = Rotation.FromYaw( 180 );
-			//var vel = new Vector3( 0, (Input.Left), (Input.Forward) );
-			var vel = new Vector3( 0, -Input.MouseDelta.x, -Input.MouseDelta.y );
+			var vel = new Vector3( 0, (Input.Left), (Input.Forward) );
+			//var vel = new Vector3( 0, -Input.MouseDelta.x, -Input.MouseDelta.y );
 
 			vel = vel.Normal * 5000;
 
