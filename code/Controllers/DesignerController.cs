@@ -20,7 +20,7 @@ namespace minimal.Controllers
 			var vel = new Vector3( 0, (Input.Left), (Input.Forward) );
 			//var vel = new Vector3( 0, -Input.MouseDelta.x, -Input.MouseDelta.y );
 
-			vel = vel.Normal * 5000;
+			vel = vel.Normal * 3000;
 
 			if ( Input.Down( InputButton.Run ) )
 				vel *= 2.0f;
