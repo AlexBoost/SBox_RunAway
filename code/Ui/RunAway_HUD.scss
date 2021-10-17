@@ -1,0 +1,53 @@
+PlayersHUD {
+    position: absolute;
+    background-color: rgb(210 134 13);
+    left: 50px;
+    top: 50px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    height: 70px;
+    align-items: center;
+    padding: 0px 25px;
+    border-radius: 50% 10% 50% 10%;
+    border: 2px solid white;
+    z-index: 7;
+
+    .subBox {
+        position: absolute;
+        background-color: rgb(243 156 18);
+        left: 0px;
+        top: 0px;
+        width: 135%;
+        font-size: 40px;
+        font-weight: bold;
+        height: 100%;
+        padding: 0px 82px;
+        border-radius: 30%;
+        z-index: -1;
+    }
+}
+
+ScoreBoard {
+    position: absolute;
+    z-index: 100;
+    width: 50%;
+    height: 70%;
+    left: 25%;
+    top: 15%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(210, 134, 13, 0.7);
+    border-radius: 5% 10%;
+    border: 5px solid white;
+
+    transition: all 0.1s ease-out;
+    transform: scale( 0.5 );
+    transform-origin: 50% 50%;
+    opacity: 0;
+
+    &.open {
+        opacity: 1;
+        transform: scale( 1 );
+    }
+}
